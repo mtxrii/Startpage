@@ -1,17 +1,10 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png">
-    <p>
-      My name is <input v-model="name">
-    </p>
-    <p>
-      <button @click="persist">Save</button>
-    </p> -->
 
     <p class="title is-3">Welcome back, {{name}}</p>
     <p class="subtitle is-3">{{time}}</p>
 
-    <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" />
+    <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" @click="openNameSettings" />
 
     <div class="columns">
       <div class="column">github and weather</div>
@@ -76,9 +69,14 @@ export default {
   },
 
   methods: {
-    persist() {
-      localStorage.name = this.name;
-      localStorage.github = this.github;
+    saveName(newName) {
+      this.name = newName;
+      localStorage.name = newName;
+    },
+
+    saveGithub(newGit) {
+      this.github = newGit;
+      localStorage.github = newGit;
     },
 
     addTodo() {
@@ -116,6 +114,18 @@ export default {
         this.time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2) + " AM";
       }
     },
+
+    openNameSettings() {
+      this.$buefy.dialog.prompt({
+        message: "Change Name",
+        inputAttrs: {
+          type: "text",
+          placeholder: "Name",
+          value: this.name
+        },
+        onConfirm: (value) => this.saveName(value)
+      })
+    }
   },
 
 }

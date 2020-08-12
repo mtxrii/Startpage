@@ -11,9 +11,13 @@
     <p class="title is-3">Welcome back, {{name}}</p>
     <p class="subtitle is-3">{{time}}</p>
 
+    <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" />
 
-
-
+    <div class="columns">
+      <div class="column">github and weather</div>
+      <div class="column is-two-fifths">tiles</div>
+      <div class="column">todo</div>
+    </div>
 
 
   </div>
@@ -24,8 +28,6 @@
 export default {
   name: 'App',
   components: {},
-
-  el: '#app',
 
   data: function() {
     return {
@@ -113,5 +115,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 30px;
+}
+
+#editIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 </style>

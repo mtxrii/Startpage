@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- <img alt="Vue logo" src="./assets/logo.png">
     <p>
       My name is <input v-model="name">
     </p>
     <p>
       <button @click="persist">Save</button>
-    </p>
+    </p> -->
+
+    <p class="title is-3">Welcome back, </p>
+    <p class="subtitle is-5">Subtitle 5</p>
+
+
+
+
+
+
   </div>
 </template>
 

@@ -8,8 +8,8 @@
       <button @click="persist">Save</button>
     </p> -->
 
-    <p class="title is-3">Welcome back, </p>
-    <p class="subtitle is-5">Subtitle 5</p>
+    <p class="title is-3">Welcome back, {{name}}</p>
+    <p class="subtitle is-3">{{time}}</p>
 
 
 
@@ -29,11 +29,18 @@ export default {
 
   data: function() {
     return {
-      name: '',
-      github: '',
+      name: 'User',
+      github: 'exampleUsername',
       todo: [],
-      newTodo: null
+      newTodo: null,
+
+      time: ''
     }
+  },
+
+  beforeMount() {
+    this.updateTime();
+    setInterval(this.updateTime, 1000);
   },
 
   mounted() {
@@ -74,7 +81,25 @@ export default {
     saveTodo() {
       const parsed = JSON.stringify(this.todo);
       localStorage.setItem('todo', parsed);
-    }
+    },
+
+    zeroPadding(num, digit) {
+      var zero = '';
+      for(var i = 0; i < digit; i++) {
+        zero += '0';
+      }
+      return (zero + num).slice(-digit);
+    },
+
+    updateTime() {
+      let cd = new Date();
+      if (cd.getHours() > 12) {
+        this.time = this.zeroPadding(cd.getHours() - 12, 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2) + " PM";
+      }
+      else {
+        this.time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2) + " AM";
+      }
+    },
   },
 
 }

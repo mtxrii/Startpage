@@ -39,7 +39,7 @@ export default {
   data: function() {
     return {
       name: 'User',
-      github: 'exampleUsername',
+      github: '',
       todo: [],
       newTodo: null,
 
@@ -124,6 +124,19 @@ export default {
           value: this.name
         },
         onConfirm: (value) => this.saveName(value)
+      })
+    },
+
+    openGitSettings() {
+      this.$buefy.dialog.prompt({
+        title: "Change Github Username",
+        message: "Uses this to check for daily commit.",
+        inputAttrs: {
+          type: "text",
+          placeholder: "Username",
+          value: this.github
+        },
+        onConfirm: (value) => this.saveGithub(value)
       })
     }
   },

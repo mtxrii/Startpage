@@ -16,7 +16,21 @@
     <div class="columns">
       <div class="column">github and weather</div>
       <div class="column is-two-fifths">tiles</div>
-      <div class="column">todo</div>
+
+      <div class="column">
+        <div v-for="(i, n) in todo" v-bind:item="i" v-bind:index="n" v-bind:key="i.id">
+          <b-tag size="is-medium">{{i}}</b-tag>
+          <b-button size="is-small" icon-right="check-all" @click="removeTodo(n)"></b-button>
+          <br>
+        </div>
+
+        <p>
+          <b-field>
+            <b-input v-model="newTodo"></b-input>
+            <b-button @click="addTodo">Add Todo</b-button>
+          </b-field>
+        </p>
+      </div>
     </div>
 
 

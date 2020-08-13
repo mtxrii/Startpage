@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <p class="title is-3">Welcome back, {{name}}</p>
+    <p class="title is-3">Welcome back, {{name}} {{commit}}</p>
     <p class="subtitle is-3">{{time}}</p>
 
     <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" @click="openNameSettings" />
@@ -39,11 +39,12 @@ export default {
   data: function() {
     return {
       name: 'User',
-      github: '',
+      github: 'mtxrii',
       todo: [],
       newTodo: null,
 
-      time: ''
+      time: '',
+      commit: false
     }
   },
 
@@ -66,6 +67,7 @@ export default {
         localStorage.removeItem('todo');
       }
     }
+    this.isThereACommitToday();
   },
 
   methods: {
@@ -138,6 +140,20 @@ export default {
         },
         onConfirm: (value) => this.saveGithub(value)
       })
+    },
+
+    isThereACommitToday() {
+      if (this.github == '') {
+        this.commit = false;
+        return;
+      }
+      const today = new Date();
+      const date = today.getFullYear() + "-" + this.zeroPadding((today.getMonth() + 1), 2) + "-" + this.zeroPadding(today.getDate(), 2);
+      fetch("https://api.github.com/search/commits?q=author:" + this.github + "+author-date:" + date + "&per_page=1", {
+          headers: {
+              Accept: "application/vnd.github.cloak-preview"
+          }
+      }).then(response => response.json()).then(data => {this.commit = (data.total_count != 0)});
     }
   },
 

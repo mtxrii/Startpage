@@ -4,13 +4,15 @@
     <p class="title is-3">Welcome back, {{name}}</p>
     <p class="subtitle is-3">{{time}}</p>
 
-    <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" @click="openNameSettings" />
+    <b-button id="editIcon1" type="is-dark" icon-right="account-edit" @click="openNameSettings" />
+    <b-button id="editIcon2" type="is-dark" icon-right="github" @click="openGitSettings" />
 
     <div class="columns">
       <div class="column">
         <div>
           <p class="title is-5">Today's Github commit</p>
-          <div class="commit full"></div>
+          <div v-if="commit" class="commit full"></div>
+          <div v-else class="commit"></div>
         </div>
       </div>
 
@@ -45,7 +47,7 @@ export default {
   data: function() {
     return {
       name: 'User',
-      github: 'mtxrii',
+      github: '',
       todo: [],
       newTodo: null,
 
@@ -176,10 +178,16 @@ export default {
   margin-top: 30px;
 }
 
-#editIcon {
+#editIcon1 {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+#editIcon2 {
+  position: absolute;
+  top: 15px;
+  right: 55px;
 }
 
 .commit {

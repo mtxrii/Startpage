@@ -1,19 +1,21 @@
 <template>
   <div id="app">
 
-    <p class="title is-3">Welcome back, {{name}} {{commit}}</p>
+    <p class="title is-3">Welcome back, {{name}}</p>
     <p class="subtitle is-3">{{time}}</p>
 
     <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" @click="openNameSettings" />
 
     <div class="columns">
-      <div class="column">github and weather</div>
+      <div class="column">github and weather
+
+      </div>
       <div class="column is-two-fifths">tiles</div>
 
       <div class="column">
-        <div v-for="(i, n) in todo" v-bind:item="i" v-bind:index="n" v-bind:key="i.id">
+        <div v-for="(i, n) in todo" v-bind:item="i" v-bind:index="n" v-bind:key="i.id" style="text-align: left;">
+          <b-button size="is-small" icon-right="check-outline" @click="removeTodo(n)"></b-button>
           <b-tag size="is-medium">{{i}}</b-tag>
-          <b-button size="is-small" icon-right="check-all" @click="removeTodo(n)"></b-button>
           <br>
         </div>
 

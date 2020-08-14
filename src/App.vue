@@ -7,9 +7,13 @@
     <b-button id="editIcon" type="is-dark" icon-right="circle-edit-outline" @click="openNameSettings" />
 
     <div class="columns">
-      <div class="column">github and weather
-
+      <div class="column">
+        <div>
+          <p class="title is-5">Today's Github commit</p>
+          <div id="noCommit"></div>
+        </div>
       </div>
+
       <div class="column is-two-fifths">tiles</div>
 
       <div class="column">
@@ -176,5 +180,23 @@ export default {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+#noCommit {
+  border: 8px solid rgba(164,164,164);
+  border-radius: 20px;
+  background-color: rgb(235, 237, 240);
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
+
+#yesCommit {
+  border: 8px solid rgba(164,164,164);
+  border-radius: 20px;
+  background-color: rgb(64, 196, 99);
+  display: inline-block;
+  height: 100px;
+  width: 100px;
 }
 </style>

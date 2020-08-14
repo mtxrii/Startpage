@@ -10,7 +10,7 @@
       <div class="column">
         <div>
           <p class="title is-5">Today's Github commit</p>
-          <div id="noCommit"></div>
+          <div class="commit full"></div>
         </div>
       </div>
 
@@ -182,8 +182,8 @@ export default {
   right: 15px;
 }
 
-#noCommit {
-  border: 8px solid rgba(164,164,164);
+.commit {
+  border: 5px solid rgba(164,164,164);
   border-radius: 20px;
   background-color: rgb(235, 237, 240);
   display: inline-block;
@@ -191,12 +191,7 @@ export default {
   width: 100px;
 }
 
-#yesCommit {
-  border: 8px solid rgba(164,164,164);
-  border-radius: 20px;
-  background-color: rgb(64, 196, 99);
-  display: inline-block;
-  height: 100px;
-  width: 100px;
+.commit.full {
+  background-color: rgb(155, 233, 168);
 }
 </style>

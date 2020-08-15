@@ -21,6 +21,14 @@
         <div>
           <p class="title is-5">Weather</p>
           <p class="subtitle is-6"><b-icon icon="map-marker" size="is-small"></b-icon> {{city}}</p>
+
+          <figure style="margin-top: -30px; margin-bottom: -5px">
+            <img :src="weather.icon">
+          </figure>
+
+          <p>Max: <strong>{{weather.max}}</strong>  Min: <strong>{{weather.min}}</strong></p>
+          <p>Feels like: <strong>{{weather.feels_like}}</strong></p>
+          <p>Humidity: <strong>{{weather.humidity}}</strong></p>
         </div>
       </div>
 
@@ -207,11 +215,16 @@ export default {
         .then(response => response.json())
         .then(data => {
           this.weather.icon = 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png';
-          this.weather.max = data.main.temp_max;
-          this.weather.min = data.main.temp_min;
-          this.weather.feels_like = data.main.feels_like;
+          this.weather.max = this.KtoF(data.main.temp_max);
+          this.weather.min = this.KtoF(data.main.temp_min);
+          this.weather.feels_like = this.KtoF(data.main.feels_like);
           this.weather.humidity = data.main.humidity;
         });
+    },
+
+    KtoF(degrees) {
+      degrees = parseFloat(degrees);
+      return ((((degrees-273.15)*1.8)+32) + "").slice(0, 4);
     }
   },
 

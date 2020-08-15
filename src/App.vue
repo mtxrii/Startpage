@@ -14,6 +14,14 @@
           <div v-if="commit" class="commit full"></div>
           <div v-else class="commit"></div>
         </div>
+
+        <br>
+        <br>
+
+        <div>
+          <p class="title is-5">Weather</p>
+          <p class="subtitle is-6"><b-icon icon="map-marker" size="is-small"></b-icon> {{city}}</p>
+        </div>
       </div>
 
       <div class="column is-two-fifths"> <!-- (2) bookmark tiles -->
@@ -56,7 +64,14 @@ export default {
       time: '',
       commit: false,
 
-      city: ''
+      city: 'loading...',
+      weather: {
+        icon: '',
+        max: '',
+        min: '',
+        feels_like: '',
+        humidity: ''
+      }
     }
   },
 
@@ -80,7 +95,7 @@ export default {
       }
     }
     this.isThereACommitToday();
-    this.getIP()
+    this.getIP();
   },
 
   methods: {
@@ -170,16 +185,33 @@ export default {
         .then(data => {this.commit = (data.total_count != 0)});
     },
 
-    getCity(ip) {
-      fetch("http://ip-api.com/json/" + ip)
-        .then(response => response.json())
-        .then(data => {this.city = data.city});
-    },
-
     getIP() {
       fetch("https://api.ipify.org/?format=json")
         .then(response => response.json())
         .then(data => this.getCity(data.ip));
+    },
+
+    getCity(ip) {
+      fetch("http://ip-api.com/json/" + ip)
+        .then(response => response.json())
+        .then(data => {
+          this.city = data.city;
+          this.loadWeather();
+        });
+    },
+
+    loadWeather() {
+      const cityName = this.city.split(" ").join("+");
+      const weatherKey = this.$keyVars.OpenWeatherMap;
+      fetch("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + weatherKey)
+        .then(response => response.json())
+        .then(data => {
+          this.weather.icon = 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png';
+          this.weather.max = data.main.temp_max;
+          this.weather.min = data.main.temp_min;
+          this.weather.feels_like = data.main.feels_like;
+          this.weather.humidity = data.main.humidity;
+        });
     }
   },
 

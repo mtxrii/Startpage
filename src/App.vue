@@ -1,6 +1,7 @@
 <template>
   <div id="app">
 
+    <br>
     <p class="title is-3">Welcome back, {{name}}</p>
     <p class="subtitle is-3">{{time}}</p>
 
@@ -238,7 +239,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 30px;
 }
 
 #editIcon1 {

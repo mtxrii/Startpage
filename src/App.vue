@@ -8,7 +8,7 @@
     <b-button id="editIcon2" type="is-dark" icon-right="github" @click="openGitSettings" />
 
     <div class="columns">
-      <div class="column">
+      <div class="column"> <!-- (1) github & weather -->
         <div>
           <p class="title is-5">Today's Github commit</p>
           <div v-if="commit" class="commit full"></div>
@@ -16,9 +16,11 @@
         </div>
       </div>
 
-      <div class="column is-two-fifths">tiles</div>
+      <div class="column is-two-fifths"> <!-- (2) bookmark tiles -->
+        tiles
+      </div>
 
-      <div class="column">
+      <div class="column"> <!-- (3) todo list -->
         <div v-for="(i, n) in todo" v-bind:item="i" v-bind:index="n" v-bind:key="i.id" style="text-align: left;">
           <b-button size="is-small" icon-right="check-outline" @click="removeTodo(n)"></b-button>
           <b-tag size="is-medium">{{i}}</b-tag>
@@ -52,7 +54,9 @@ export default {
       newTodo: null,
 
       time: '',
-      commit: false
+      commit: false,
+
+      city: ''
     }
   },
 
@@ -76,6 +80,7 @@ export default {
       }
     }
     this.isThereACommitToday();
+    this.getIP()
   },
 
   methods: {
@@ -161,7 +166,20 @@ export default {
           headers: {
               Accept: "application/vnd.github.cloak-preview"
           }
-      }).then(response => response.json()).then(data => {this.commit = (data.total_count != 0)});
+      }).then(response => response.json())
+        .then(data => {this.commit = (data.total_count != 0)});
+    },
+
+    getCity(ip) {
+      fetch("http://ip-api.com/json/" + ip)
+        .then(response => response.json())
+        .then(data => {this.city = data.city});
+    },
+
+    getIP() {
+      fetch("https://api.ipify.org/?format=json")
+        .then(response => response.json())
+        .then(data => this.getCity(data.ip));
     }
   },
 

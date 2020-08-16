@@ -34,7 +34,27 @@
       </div>
 
       <div class="column is-two-fifths"> <!-- (2) bookmark tiles -->
-        tiles
+        <div class="columns is-mobile is-multiline is-centered">
+          <div class="column is-narrow">
+            <a href="https://www.reddit.com/r/UCSC/">
+            <div class="card">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-32x32" style="padding-top: 3px">
+                      <img src="https://www.google.com/s2/favicons?domain=reddit.com" alt="Favicon">
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="title is-6">Reddit</p>
+                    <p class="subtitle is-7">reddit.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
       </div>
 
       <div class="column"> <!-- (3) todo list -->

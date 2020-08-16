@@ -29,7 +29,7 @@
 
           <p>Max: <strong>{{weather.max}}</strong>  Min: <strong>{{weather.min}}</strong></p>
           <p>Feels like: <strong>{{weather.feels_like}}</strong></p>
-          <p>Humidity: <strong>{{weather.humidity}}</strong></p>
+          <p>Humidity: <strong>{{weather.humidity}}%</strong></p>
         </div>
       </div>
 
@@ -39,9 +39,9 @@
 
       <div class="column"> <!-- (3) todo list -->
         <div v-for="(i, n) in todo" v-bind:item="i" v-bind:index="n" v-bind:key="i.id" style="text-align: left;">
-          <b-button size="is-small" icon-right="check-outline" @click="removeTodo(n)"></b-button>
+          <b-button rounded style="margin-top: 2px; margin-right: 2px" size="is-small" icon-right="check-outline" @click="removeTodo(n)"></b-button>
           <b-tag size="is-medium">{{i}}</b-tag>
-          <br>
+          <div style="padding-top: 5px"></div>
         </div>
 
         <p>

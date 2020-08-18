@@ -14,10 +14,22 @@ Only requires specification of your preferred name & Github username. Username i
 
 All data is saved in your browser's localStore. This means your name & username, as well as any bookmarks and to-do items are never sent anywhere. There is no backend or database.
 
-### Editing
-Want to modify this project?
+### Libraries & APIs
+* App written in [Vue.js](https://vuejs.org/)
+* Daily commit checked with [Github Search API](https://docs.github.com/en/github/searching-for-information-on-github/searching-commits)
+* Weather provided by [Open Weather Map](https://openweathermap.org/)
+* Location (for weather) retrieved using [IP API](https://ip-api.com/docs/api:json)
 
-Everything is written in [Vue.js](https://vuejs.org/). To make edits, fork & clone, then do the usual `npm install` & `npm run serve`
+### Editing
+Want to modify this project? You'll need to download NPM & VueJS. To make edits, fork & clone, then do `npm install` & `npm run serve`
+
+If you want to use the weather component, you'll need an [Open Weather Map](https://openweathermap.org/) API key. Make a new file inside ./src/ named `keys.js` and fill it in like such:
+
+```
+export const keys = {
+    OpenWeatherMap: 'PASTE API KEY HERE'
+}
+```
 
 ### License
 [MIT](https://github.com/mtxrii/Startpage/blob/master/LICENSE.md)

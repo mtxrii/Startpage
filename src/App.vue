@@ -35,25 +35,46 @@
 
       <div class="column is-two-fifths"> <!-- (2) bookmark tiles -->
         <div class="columns is-mobile is-multiline is-centered">
+
           <div class="column is-narrow">
-            <a href="https://www.reddit.com/r/UCSC/">
-            <div class="card">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-32x32" style="padding-top: 3px">
-                      <img src="https://www.google.com/s2/favicons?domain=reddit.com" alt="Favicon">
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-6">Reddit</p>
-                    <p class="subtitle is-7">reddit.com</p>
+            <a @click="openNewLinkMenu()">
+              <div class="card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-32x32" style="padding-top: 3px">
+                        <img src="https://www.pikpng.com/pngl/m/4-49677_add-button-with-plus-symbol-in-a-black.png" alt="plus icon">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <p class="title is-6" style="padding-top: 9px; padding-bottom: 9px">Add Link</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </a>
           </div>
+
+          <div class="column is-narrow">
+            <a href="https://www.reddit.com/r/UCSC/">
+              <div class="card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-32x32" style="padding-top: 3px">
+                        <img src="https://www.google.com/s2/favicons?domain=reddit.com" alt="Favicon">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <p class="title is-6">Reddit</p>
+                      <p class="subtitle is-7">reddit.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          
         </div>
       </div>
 
@@ -89,6 +110,7 @@ export default {
       github: '',
       todo: [],
       newTodo: null,
+      links: [],
 
       time: '',
       commit: false,
@@ -113,9 +135,11 @@ export default {
     if (localStorage.name) {
       this.name = localStorage.name;
     }
+
     if (localStorage.github) {
       this.github = localStorage.github;
     }
+
     if (localStorage.getItem('todo')) {
       try {
         this.todo = JSON.parse(localStorage.getItem('todo'));
@@ -123,6 +147,15 @@ export default {
         localStorage.removeItem('todo');
       }
     }
+
+    if (localStorage.getItem('links')) {
+      try {
+        this.links = JSON.parse(localStorage.getItem('links'));
+      } catch(e) {
+        localStorage.removeItem('links');
+      }
+    }
+
     this.isThereACommitToday();
     this.getIP();
   },
@@ -146,14 +179,34 @@ export default {
       this.saveTodo();
     },
 
+    addLink(newLink, linkName) {
+      if (!newLink || !linkName) return;
+
+      this.links.push({
+        name: linkName,
+        href: newLink
+      });
+      this.saveLinks();
+    },
+
     removeTodo(x) {
       this.todo.splice(x, 1);
       this.saveTodo();
     },
 
+    removeLink(x) {
+      this.links.splice(x, 1);
+      this.saveLinks();
+    },
+
     saveTodo() {
       const parsed = JSON.stringify(this.todo);
       localStorage.setItem('todo', parsed);
+    },
+
+    saveLinks() {
+      const parsed = JSON.stringify(this.links);
+      localStorage.setItem('links', parsed);
     },
 
     zeroPadding(num, digit) {
@@ -197,6 +250,10 @@ export default {
         },
         onConfirm: (value) => this.saveGithub(value)
       })
+    },
+
+    openNewLinkMenu() {
+      this.$buefy.dialog.alert('Everything looks fine!')
     },
 
     isThereACommitToday() {

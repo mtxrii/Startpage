@@ -13,7 +13,7 @@
         <div class="columns">
 
           <div class="column"> <!-- (1) github & weather -->
-            <div class="card">
+            <div class="card transparent">
               <div class="card-content">
                 <p class="title is-5">Today's Github commit</p>
                 <div v-if="commit" class="commit full"></div>
@@ -24,7 +24,7 @@
             <br>
             <br>
 
-            <div class="card">
+            <div class="card transparent">
               <div class="card-content">
                 <p class="title is-5">Weather</p>
                 <p class="subtitle is-6"><b-icon icon="map-marker" size="is-small"></b-icon> {{city}}</p>
@@ -45,12 +45,12 @@
 
               <div class="column is-narrow">
                 <a @click="openNewLinkMenu()">
-                  <div class="card">
+                  <div class="card transparent">
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
                           <figure class="image is-32x32" style="padding-top: 3px">
-                            <img src="https://www.pikpng.com/pngl/m/4-49677_add-button-with-plus-symbol-in-a-black.png" alt="plus icon">
+                            <img src="./assets/icon_plus.png" alt="plus icon">
                           </figure>
                         </div>
                         <div class="media-content">
@@ -64,7 +64,7 @@
 
               <div class="column is-narrow">
                 <a href="https://www.reddit.com/r/UCSC/">
-                  <div class="card">
+                  <div class="card transparent">
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
@@ -86,7 +86,7 @@
           </div>
 
           <div class="column"> <!-- (3) todo list -->
-            <div class="card">
+            <div class="card transparent">
               <div class="card-content">
                 <div v-for="(i, n) in todo" v-bind:item="i" v-bind:index="n" v-bind:key="i.id" style="text-align: left;">
                   <b-button rounded style="margin-top: 2px; margin-right: 2px" size="is-small" icon-right="check-outline" @click="removeTodo(n)"></b-button>

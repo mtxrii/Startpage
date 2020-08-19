@@ -19,6 +19,7 @@ All data is saved in your browser's localStore. This means your name & username,
 * Daily commit checked with [Github Search API](https://docs.github.com/en/github/searching-for-information-on-github/searching-commits)
 * Weather provided by [Open Weather Map](https://openweathermap.org/)
 * Location (for weather) retrieved using [IP API](https://ip-api.com/docs/api:json)
+* Favicons fetched from [Github favicon database](https://favicons.githubusercontent.com/reddit.com)
 
 ### Editing
 Want to modify this project? You'll need to download NPM & VueJS. To make edits, fork & clone, then do `npm install` & `npm run serve`

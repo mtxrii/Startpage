@@ -62,19 +62,19 @@
                 </a>
               </div>
 
-              <div class="column is-narrow">
-                <a href="https://www.reddit.com/r/UCSC/">
+              <div class="column is-narrow" v-for="(i, n) in links" v-bind:item="i" v-bind:index="n" v-bind:key="i.id">
+                <a :href="i.href">
                   <div class="card transparent">
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
                           <figure class="image is-32x32" style="padding-top: 3px">
-                            <img src="https://www.google.com/s2/favicons?domain=reddit.com" alt="Favicon">
+                            <img :src="'https://favicons.githubusercontent.com/'+domainStrip(i.href, false)" alt="site icon">
                           </figure>
                         </div>
                         <div class="media-content">
-                          <p class="title is-6">Reddit</p>
-                          <p class="subtitle is-7">reddit.com</p>
+                          <p class="title is-6">{{i.name}}</p>
+                          <p class="subtitle is-7">{{domainStrip(i.href, true)}}</p>
                         </div>
                       </div>
                     </div>
@@ -265,7 +265,21 @@ export default {
     },
 
     openNewLinkMenu() {
-      this.$buefy.dialog.alert('Everything looks fine!')
+      this.$buefy.dialog.prompt({
+        message: "New bookmark",
+        inputAttrs: {
+          type: "text",
+          placeholder: "link"
+        },
+        onConfirm: (linkTxt) => this.$buefy.dialog.prompt({
+          message: "Name for bookmark",
+          inputAttrs: {
+            type: "text",
+            placeholder: "name"
+          },
+          onConfirm: (nameTxt) => this.addLink(linkTxt, nameTxt)
+        })
+      })
     },
 
     isThereACommitToday() {
@@ -315,7 +329,19 @@ export default {
     KtoF(degrees) {
       degrees = parseFloat(degrees);
       return ((((degrees-273.15)*1.8)+32) + "").slice(0, 4);
+    },
+
+    domainStrip(txt, includePath) {
+      txt = txt.replace('https://www.', '');
+      txt = txt.replace('http://www.', '');
+      if (includePath) {
+        return txt;
+      }
+      else {
+        return txt.split("/")[0];
+      }
     }
+
   },
 
 }

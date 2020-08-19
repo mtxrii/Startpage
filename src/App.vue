@@ -62,7 +62,8 @@
                 </a>
               </div>
 
-              <div class="column is-narrow" v-for="(i, n) in links" v-bind:item="i" v-bind:index="n" v-bind:key="i.id">
+              <div class="column is-narrow" v-for="(i, n) in links" v-bind:item="i" v-bind:index="n" v-bind:key="i.id" style="position: relative">
+                <button id="card-x" @click="removeLink(n)">x</button>
                 <a :href="i.href">
                   <div class="card transparent">
                     <div class="card-content">
@@ -334,6 +335,8 @@ export default {
     domainStrip(txt, includePath) {
       txt = txt.replace('https://www.', '');
       txt = txt.replace('http://www.', '');
+      txt = txt.replace('https://', '');
+      txt = txt.replace('http://', '');
       if (includePath) {
         return txt;
       }
@@ -366,6 +369,13 @@ export default {
   position: absolute;
   top: 15px;
   right: 55px;
+}
+
+#card-x {
+  position: absolute;
+  left: 90%;
+  top: 2%;
+  z-index: 2;
 }
 
 .commit {

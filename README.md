@@ -1,7 +1,7 @@
 # Translucent Startpage
 A simple bookmark launchpad with some other utilities.
 
-[image]
+<img src="src/assets/preview_1.gif" width="90%">
 
 ### Features
 * Add your bookmarks front & center.

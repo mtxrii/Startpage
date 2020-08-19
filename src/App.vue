@@ -63,7 +63,7 @@
               </div>
 
               <div class="column is-narrow" v-for="(i, n) in links" v-bind:item="i" v-bind:index="n" v-bind:key="i.id" style="position: relative">
-                <button id="card-x" @click="removeLink(n)">x</button>
+                <b-button type="is-danger" icon-right="delete-off" id="card-x" @click="removeLink(n)" />
                 <a :href="i.href">
                   <div class="card transparent">
                     <div class="card-content">
@@ -376,6 +376,7 @@ export default {
   left: 90%;
   top: 2%;
   z-index: 2;
+  font-size: 10px;
 }
 
 .commit {
